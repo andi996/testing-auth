@@ -33,16 +33,9 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     // </ThemeProvider>
     <ThemeProvider theme={THEME}>
       <Provider store={store}>
-        <Translator
-          // cacheProvider={cacheProvider}
-          from="id"
-          to="en"
-          googleApiKey="AIzaSyA5i2CgjF1BeKtERnfIdjRyPUMQjJAZY9s"
-        >
-          {/* <SessionProvider session={session}> */}
+        <SessionProvider session={session}>
           <Component {...pageProps} />
-          {/* </SessionProvider> */}
-        </Translator>
+        </SessionProvider>
       </Provider>
     </ThemeProvider>
   );

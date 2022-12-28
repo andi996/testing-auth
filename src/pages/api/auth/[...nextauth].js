@@ -2,11 +2,6 @@ import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import LinkedInProvider from "next-auth/providers/linkedin";
 import FacebookProvider from "next-auth/providers/facebook";
-import CredentialsProvider from "next-auth/providers/credentials";
-import axios from "axios";
-import { API2 } from "../../../api/service";
-import { endpoints } from "../../../api/endpoint";
-import Cookies from "cookies";
 
 // export default NextAuth({
 const nextAuthOptions = (req, res) => {
@@ -49,54 +44,7 @@ const nextAuthOptions = (req, res) => {
         return session;
       },
       async signIn({ user, account, profile, email, credentials }) {
-        console.log(account.provider);
-
-        //   if (account.provider !== "credentials") {
-        if (account.provider == "google") {
-          //get ip address
-          const dataInfo = await axios
-            .get("https://geolocation-db.com/json/")
-            .then((res) => {
-              return `web | ${res.data.IPv4}`;
-            })
-            .catch((err) => {
-              console.log("error", err);
-            });
-
-          //hit api login with social
-          const isSuccessLogin = await axios
-            .post(
-              `https://karir-api.staging.qareer.com/v1/login/${account.provider}`,
-              {
-                email: profile.email,
-                code: account.access_token,
-                device_id: dataInfo ? dataInfo : "web",
-              }
-            )
-            .then((response) => {
-              const today = new Date();
-              const cookieExp30Day = new Date(
-                new Date().setDate(today.getDate() + 30)
-              );
-              const cookies = new Cookies(req, res); // Create a cookies instance
-              cookies.set("user", JSON.stringify(response?.data?.data), {
-                expires: cookieExp30Day,
-                httpOnly: false,
-              });
-              cookies.set("Authorization", response?.data?.data?.token, {
-                expires: cookieExp30Day,
-                httpOnly: false,
-              });
-              return true;
-            })
-            .catch((err) => {
-              return false;
-            });
-
-          return isSuccessLogin;
-        } else {
-          return true;
-        }
+        return true;
       },
     },
     pages: {
