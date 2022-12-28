@@ -8,7 +8,7 @@ module.exports = {
     LINKEDIN_CLIENT_SECRET: "YdL4JnY9OqOjmIvd",
     FACEBOOK_CLIENT_ID: "673084211089297",
     FACEBOOK_CLIENT_SECRET: "e7c6d8951994064a6eefe3d261d460cb",
-    NEXTAUTH_URL: "http://localhost:3000/",
+    NEXTAUTH_URL: "https://testing-auth-six.vercel.app",
     NEXTAUTH_SECRET: "lSrcavytjCoHGm5YeETGvaJYghQWXxgXAtAphIlAtiwD",
   },
 };
