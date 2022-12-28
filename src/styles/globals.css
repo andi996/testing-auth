@@ -1,0 +1,273 @@
+@font-face {
+  font-family: "MuseoSans";
+  src: url("/fonts/MuseoSans/MuseoSans_300.ttf");
+  font-style: normal;
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "MuseoSans";
+  src: url("/fonts/MuseoSans/MuseoSans_300_Italic.ttf");
+  font-style: italic;
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "MuseoSans";
+  src: url("/fonts/MuseoSans/MuseoSans_500.ttf");
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "MuseoSans";
+  src: url("/fonts/MuseoSans/MuseoSans_500_Italic.ttf");
+  font-style: italic;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "MuseoSans";
+  src: url("/fonts/MuseoSans/MuseoSans_700.ttf");
+  font-style: normal;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "MuseoSans";
+  src: url("/fonts/MuseoSans/MuseoSans_700_Italic.ttf");
+  font-style: italic;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "MuseoSans";
+  src: url("/fonts/MuseoSans/MuseoSans_900.ttf");
+  font-style: normal;
+  font-weight: 900;
+}
+
+:root {
+  /* Primary colors */
+  --primary-mid-blue: #1d62ae;
+  --primary-clear-blue: #1f96ff;
+  --primary-pale-grey: #f4faff;
+  --primary-dark-blue: #0f4a89;
+
+  /* Secondary colors */
+  --secondary-highlight-green: #64b40c;
+  --secondary-red: #cb0000;
+  --secondary-orange-yellow: #ffa800;
+
+  /* Text colors */
+  --text-greyish-brown: #4c4c4c;
+  --text-brown-grey: #797979;
+  --text-brown-light-grey: #a5a5a5;
+  --text-very-light-grey: #eeeeee;
+  --text-white: #ffffff;
+  --text-frog-green: #019b07;
+  --text-orange: #ff8c02;
+
+  /* Component */
+  --component-inactive-grey: #d2d2d2;
+  --component-inactive-light-grey: #e6e4e4;
+  --component-disable: #a5a5a5;
+  --component-very-light-blue-two: #e5edf6;
+
+  /* Gradient */
+  --gradient-karir-r-l: linear-gradient(
+    202.71deg,
+    #3e9bd7 9.32%,
+    #1d62ae 92.16%
+  );
+  --gradient-karir-l-r: linear-gradient(
+    140.11deg,
+    #1ac1f1 13.07%,
+    #1d62ae 84.59%
+  );
+
+  /* Overlay */
+  --overlay-blue-light: linear-gradient(
+    83.1deg,
+    rgba(222, 239, 255, 0.75142) 5.39%,
+    rgba(186, 218, 253, 0.53) 95.91%
+  );
+  --overlay-blue-dark: linear-gradient(
+    180deg,
+    rgba(62, 155, 215, 0.17671) 0%,
+    rgba(29, 98, 174, 0.782015) 100%
+  );
+  --overlay-dark: rgba(30, 30, 30, 0.502131);
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "MuseoSans";
+  color: var(--text-greyish-brown);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Typography */
+.h1 {
+  font-family: "MuseoSans";
+  font-size: 38px;
+
+  line-height: 42px;
+
+  /* identical to box height, or 111% */
+  letter-spacing: -0.5px;
+}
+
+.h2 {
+  font-family: "MuseoSans";
+  font-size: 24px;
+
+  line-height: 28px;
+
+  letter-spacing: -0.2px;
+}
+
+.h3 {
+  font-family: "MuseoSans";
+  font-size: 20px;
+
+  line-height: 26px;
+
+  letter-spacing: -0.1px;
+}
+
+.h4 {
+  font-family: "MuseoSans";
+  font-size: 16px;
+
+  line-height: 22px;
+
+  letter-spacing: 0;
+}
+
+.h5 {
+  font-family: "MuseoSans";
+  font-size: 14px;
+
+  line-height: 18px;
+
+  letter-spacing: 0;
+}
+
+.h6 {
+  font-family: "MuseoSans";
+  font-size: 12px;
+
+  line-height: 16px;
+
+  letter-spacing: 0;
+}
+
+.body1 {
+  font-family: "MuseoSans";
+  font-size: 16px;
+
+  line-height: 22px;
+
+  letter-spacing: 0;
+}
+
+.body2 {
+  font-family: "MuseoSans";
+  font-size: 14px;
+
+  line-height: 20px;
+
+  letter-spacing: 0;
+}
+
+.body3 {
+  font-family: "MuseoSans";
+  font-size: 12px;
+
+  line-height: 18px;
+
+  letter-spacing: 0;
+}
+
+.small {
+  font-family: "MuseoSans";
+  font-size: 10px;
+
+  line-height: 16px;
+
+  letter-spacing: 0;
+}
+
+/* Text alignment */
+.right {
+  text-align: right;
+}
+
+.center {
+  text-align: center;
+}
+.left {
+  text-align: left;
+}
+
+.d-flex {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.d-flex-fullwidth {
+  align-items: center;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #d2d2d2;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 4px;
+}
+::-webkit-scrollbar-thumb:horizontal {
+  background: #d2d2d2;
+  border-radius: 3px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.link {
+  color: #1f96ff;
+}

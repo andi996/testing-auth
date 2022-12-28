@@ -1,0 +1,11 @@
+<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Principle/Logo/Indonesia">
+<mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="96" height="96">
+<circle id="Mask" cx="48" cy="48" r="48" fill="#C4C4C4"/>
+</mask>
+<g mask="url(#mask0)">
+<circle id="Oval" cx="48" cy="48" r="48" fill="#F0F0F0"/>
+<path id="Path" d="M-3.2 46.4C-3.2 18.1232 19.0069 -4.8 46.4 -4.8C73.7932 -4.8 96 18.1232 96 46.4" fill="#F70000"/>
+</g>
+</g>
+</svg>
