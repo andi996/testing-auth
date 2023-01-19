@@ -13,15 +13,16 @@ export default function Index() {
   return (
     <div>
       <Head>
-        <title>NextAuth Google Authentication</title>
+        <title>NextAuth Authentication</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1>Google Authentication with NextAuth </h1>
+      <h1>Google or Facebook Authentication with NextAuth </h1>
 
       {!session && (
         <>
-          <button onClick={() => signIn("google")}>Sign In</button>
+          <button onClick={() => signIn("google")}>Sign In Google</button>
+          <button onClick={() => signIn("facebook")}>Sign In Facebook</button>
         </>
       )}
 
