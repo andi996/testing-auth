@@ -32,13 +32,13 @@ export default function Index({ user }) {
 
       {user && (
         <>
-          <h4>You are logged as: {user.user.name}</h4>
+          <h4>You are logged as: {user.name}</h4>
           <div>
-            <h4>Email: {user.user.email}</h4>
+            <h4>Email: {user.email}</h4>
             <br />
-            {user.user.image && (
+            {user.image && (
               <span>
-                <img src={user.user.image} alt={user.user.name} />
+                <img src={user.image} alt={user.name} />
               </span>
             )}
           </div>
