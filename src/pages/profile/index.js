@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { useSession, signIn, signOut, getSession } from "next-auth/react";
+import checkUserIsSignIn from "../api/get-token-example";
 
 export async function getServerSideProps(context) {
   var isAlreadyUser = await checkUserIsSignIn(context.req, context.res);
