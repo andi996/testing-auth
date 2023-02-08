@@ -27,15 +27,15 @@ export default function Index({ user }) {
 
       <h1>PROFILE PROTECTED </h1>
 
-      {session && (
+      {user && (
         <>
-          <h4>You are logged as: {session.user.name}</h4>
+          <h4>You are logged as: {user.user.name}</h4>
           <div>
-            <h4>Email: {session.user.email}</h4>
+            <h4>Email: {user.user.email}</h4>
             <br />
-            {session.user.image && (
+            {user.user.image && (
               <span>
-                <img src={session.user.image} alt={session.user.name} />
+                <img src={user.user.image} alt={user.user.name} />
               </span>
             )}
           </div>
