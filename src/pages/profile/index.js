@@ -1,15 +1,25 @@
 import Head from "next/head";
 import { useSession, signIn, signOut, getSession } from "next-auth/react";
 
-export default function Index() {
-  const { data: session, status } = useSession();
+export async function getServerSideProps(context) {
+  var isAlreadyUser = await checkUserIsSignIn(context.req, context.res);
+  // console.log("ISI SESSION", session);
+  console.log("ISI TES", isAlreadyUser);
 
-  if (status == "loading") {
-    return <p>Loading...</p>;
+  if (!isAlreadyUser) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
   }
 
-  console.log(session);
+  return { props: { user: isAlreadyUser || null } };
+}
 
+export default function Index({ user }) {
+  console.log("INI ADALAH ISI USER", user);
   return (
     <div>
       <Head>
@@ -17,25 +27,7 @@ export default function Index() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1>Google or Facebook Authentication with NextAuth </h1>
-
-      {!session && (
-        <>
-          <button onClick={() => signIn("google")}>Sign In Google</button>
-          <button
-            onClick={() =>
-              signIn("facebook", {
-                scope: "email phone name",
-              })
-            }
-          >
-            Sign In Facebook With Scope
-          </button>
-          <button onClick={() => signIn("facebook")}>
-            Sign In Facebook Normally
-          </button>
-        </>
-      )}
+      <h1>PROFILE PROTECTED </h1>
 
       {session && (
         <>
