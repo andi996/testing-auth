@@ -1,19 +1,26 @@
 import Head from "next/head";
 import { useSession, signIn, signOut, getSession } from "next-auth/react";
 
-export async function getServerSideProps(context) {
-  const userData = await getSession(context);
+import { authOptions } from "../api/auth/[...nextauth]";
+import { getServerSession } from "next-auth";
 
-  if (!userData) {
+export async function getServerSideProps(context) {
+  const isAlreadyUser = await getServerSession(
+    context.req,
+    context.res,
+    authOptions // konfigurasi dari api/auth/[...nextauth]
+  );
+
+  if (!isAlreadyUser) {
     return {
       redirect: {
-        destination: "/",
+        destination: redirectParams ? redirectParams : "/",
         permanent: false,
       },
     };
   }
 
-  return { props: { user: userData || null } };
+  return { props: { userData: isAlreadyUser || null } };
 }
 
 export default function Index({ user }) {

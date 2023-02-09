@@ -25,7 +25,7 @@ export default function Index() {
           <button
             onClick={() =>
               signIn("facebook", {
-                scope: "email phone name",
+                callbackUrl: "/profile-two",
               })
             }
           >
