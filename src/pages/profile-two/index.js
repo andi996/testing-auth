@@ -14,7 +14,7 @@ export async function getServerSideProps(context) {
   if (!isAlreadyUser) {
     return {
       redirect: {
-        destination: redirectParams ? redirectParams : "/",
+        destination: "/",
         permanent: false,
       },
     };
