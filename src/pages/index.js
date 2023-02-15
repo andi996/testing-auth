@@ -17,10 +17,10 @@ export default function Index() {
     redirect: false,
   };
 
-  const handleLogin = async (e) => {
+  const handleLogin = async (e, provider) => {
     e.preventDefault();
-    const response = await signIn("facebook", { redirect: false });
-    console.log("ISI response", response);
+    window.history.pushState({}, document.title, window.location.pathname);
+    signIn(provider, { redirect: false });
   };
 
   return (
@@ -34,7 +34,7 @@ export default function Index() {
 
       {!session && (
         <>
-          <button
+          {/* <button
             onClick={() =>
               signIn("credentials", {
                 data: JSON.stringify(datas),
@@ -43,11 +43,12 @@ export default function Index() {
             }
           >
             Sign In Credentials
+          </button> */}
+          <button onClick={(e) => handleLogin(e, "google")}>
+            Sign In Google
           </button>
-          <button onClick={() => signIn("google")}>Sign In Google</button>
-
-          <button onClick={(e) => handleLogin(e)}>
-            Sign In Facebook Normally
+          <button onClick={(e) => handleLogin(e, "facebook")}>
+            Sign In Facebook
           </button>
         </>
       )}

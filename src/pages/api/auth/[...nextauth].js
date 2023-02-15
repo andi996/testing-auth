@@ -69,11 +69,19 @@ export const authOptions = (req, res) => {
           httpOnly: false,
         });
 
-        if (user.email == "" || user.email == undefined || user.email == null) {
-          return false;
-        } else {
+        // if (user.email == "" || user.email == undefined || user.email == null) {
+        //   return false;
+        // } else {
+        //   return true;
+        // }
+
+        if (user) {
+          if (user.email == undefined) {
+            throw new Error("Silahkan gunakan metode login yang lain");
+          }
           return true;
         }
+        return false;
       },
       async jwt({ token, account, user }) {
         // Persist the OAuth access_token to the token right after signin
@@ -100,7 +108,7 @@ export const authOptions = (req, res) => {
       // newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
     },
     // Enable debug messages in the console if you are having problems
-    debug: process.env.NODE_ENV === "development",
+    // debug: process.env.NODE_ENV === "development",
   };
 };
 
