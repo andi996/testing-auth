@@ -105,5 +105,5 @@ export const authOptions = (req, res) => {
 };
 
 export default (req, res) => {
-  return NextAuth(req, res, nextAuthOptions(req, res));
+  return NextAuth(req, res, authOptions(req, res));
 };
