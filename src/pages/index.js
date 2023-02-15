@@ -10,6 +10,13 @@ export default function Index() {
 
   console.log(session);
 
+  const datas = {
+    id: 1,
+    name: "andri",
+    age: 26,
+    redirect: false,
+  };
+
   return (
     <div>
       <Head>
@@ -21,6 +28,16 @@ export default function Index() {
 
       {!session && (
         <>
+          <button
+            onClick={() =>
+              signIn("credentials", {
+                data: JSON.stringify(datas),
+                callbackUrl: "/profile-two",
+              })
+            }
+          >
+            Sign In Credentials
+          </button>
           <button onClick={() => signIn("google")}>Sign In Google</button>
           <button
             onClick={() =>

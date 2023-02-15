@@ -2,10 +2,39 @@ import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import LinkedInProvider from "next-auth/providers/linkedin";
 import FacebookProvider from "next-auth/providers/facebook";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 // export default NextAuth({
 export const authOptions = {
   providers: [
+    CredentialsProvider({
+      id: "credentials",
+      async authorize(credentials, req) {
+        console.log("ISI CREDENTIALS", credentials);
+        console.log("ISI req", req);
+
+        var tes;
+        if (credentials?.data) {
+          tes = JSON.parse(credentials?.data);
+        }
+
+        console.log(tes);
+
+        const user = {
+          id: parseInt(credentials?.id),
+          name: credentials?.name,
+          age: credentials?.age,
+        };
+
+        if (user) {
+          // Any object returned will be saved in `user` property of the JWT
+          return user;
+        } else {
+          // If you return null then an error will be displayed advising the user to check their details.
+          return null;
+        }
+      },
+    }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -43,6 +72,9 @@ export const authOptions = {
       return session;
     },
     async signIn({ user, account, profile, email, credentials }) {
+      console.log("ISI USER ", user);
+      console.log("ISI ACCOUNT ", account);
+      console.log("ISI PROFILE ", profile);
       return true;
     },
   },

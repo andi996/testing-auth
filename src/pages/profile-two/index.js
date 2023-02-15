@@ -20,7 +20,7 @@ export async function getServerSideProps(context) {
     };
   }
 
-  return { props: { userData: isAlreadyUser || null } };
+  return { props: { user: isAlreadyUser || null } };
 }
 
 export default function Index({ user }) {
