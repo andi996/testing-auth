@@ -17,16 +17,11 @@ export default function Index() {
     redirect: false,
   };
 
-  const loginFacebook = () => {
-    signIn("facebook", { redirect: false }).then(({ ok, error, status }) => {
-      if (ok) {
-        console.log("ISI STATUS", status);
-        console.log("ISI OK", ok);
-      } else {
-        console.log("ISI ERROR", status);
-        console.log("ISI STATUS", error);
-      }
-    });
+  const handleLogin = async () => {
+    const { ok, error } = await signIn("facebook", { redirect: false });
+    console.log("ISI OK", ok);
+    // Handle errors here
+    console.log("ISI ERROR", error);
   };
 
   return (
@@ -52,9 +47,7 @@ export default function Index() {
           </button>
           <button onClick={() => signIn("google")}>Sign In Google</button>
 
-          <button onClick={() => loginFacebook()}>
-            Sign In Facebook Normally
-          </button>
+          <button onClick={handleLogin}>Sign In Facebook Normally</button>
         </>
       )}
 
