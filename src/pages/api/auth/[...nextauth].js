@@ -56,6 +56,12 @@ export const authOptions = {
     maxAge: 60 * 60 * 24 * 30,
   },
   callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      console.log("ISI USER ", user);
+      console.log("ISI ACCOUNT ", account);
+      console.log("ISI PROFILE ", profile);
+      return true;
+    },
     async jwt({ token, account, user }) {
       // Persist the OAuth access_token to the token right after signin
       if (account) {
@@ -70,12 +76,6 @@ export const authOptions = {
       session.accessToken = token.accessToken;
       session.user.email = token.email;
       return session;
-    },
-    async signIn({ user, account, profile, email, credentials }) {
-      console.log("ISI USER ", user);
-      console.log("ISI ACCOUNT ", account);
-      console.log("ISI PROFILE ", profile);
-      return true;
     },
   },
   pages: {
