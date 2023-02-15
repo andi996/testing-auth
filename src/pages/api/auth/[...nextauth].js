@@ -60,7 +60,12 @@ export const authOptions = {
       console.log("ISI USER ", user);
       console.log("ISI ACCOUNT ", account);
       console.log("ISI PROFILE ", profile);
-      return true;
+
+      if (user.email == "" || user.email == undefined || user.email == null) {
+        return false;
+      } else {
+        return true;
+      }
     },
     async jwt({ token, account, user }) {
       // Persist the OAuth access_token to the token right after signin
