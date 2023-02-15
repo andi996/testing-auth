@@ -17,11 +17,10 @@ export default function Index() {
     redirect: false,
   };
 
-  const handleLogin = async () => {
-    const { ok, error } = await signIn("facebook", { redirect: false });
-    console.log("ISI OK", ok);
-    // Handle errors here
-    console.log("ISI ERROR", error);
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const response = await signIn("facebook", { redirect: false });
+    console.log("ISI response", response);
   };
 
   return (
@@ -47,7 +46,9 @@ export default function Index() {
           </button>
           <button onClick={() => signIn("google")}>Sign In Google</button>
 
-          <button onClick={handleLogin}>Sign In Facebook Normally</button>
+          <button onClick={(e) => handleLogin(e)}>
+            Sign In Facebook Normally
+          </button>
         </>
       )}
 
