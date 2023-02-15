@@ -18,7 +18,7 @@ export default function Index() {
   };
 
   const loginFacebook = () => {
-    signIn("google", { redirect: false }).then(({ ok, error, status }) => {
+    signIn("facebook", { redirect: false }).then(({ ok, error, status }) => {
       if (ok) {
         console.log("ISI STATUS", status);
         console.log("ISI OK", ok);
