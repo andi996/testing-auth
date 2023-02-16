@@ -85,7 +85,7 @@ export const authOptions = (req, res) => {
           if (user.email == undefined) {
             throw new Error("account-has-no-email");
           }
-          payload.code = account.access_token;
+          // payload.code = account.access_token;
           payload.device_id = "web";
         }
 
