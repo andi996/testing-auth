@@ -4,6 +4,7 @@ import LinkedInProvider from "next-auth/providers/linkedin";
 import FacebookProvider from "next-auth/providers/facebook";
 import CredentialsProvider from "next-auth/providers/credentials";
 import Cookies from "cookies";
+import axios from "axios";
 
 // export default NextAuth({
 export const authOptions = (req, res) => {
