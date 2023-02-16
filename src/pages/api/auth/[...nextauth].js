@@ -101,11 +101,22 @@ export const authOptions = (req, res) => {
           if (status === 200) {
             user.data = data;
             return true;
-          } else {
-            throw new Error(`${status}`);
           }
-        } catch (err) {
-          throw err;
+          // else {
+          //   throw new Error(`${status}`);
+          //   // hasil, https://testing-auth-six.vercel.app/?error=Request%20failed%20with%20status%20code%20400#_=_
+          // }
+        } catch (error) {
+          if (error.response) {
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.header);
+          } else if (error.request) {
+            console.log(error.request);
+          } else {
+            console.log("ISI ERROR", error.message);
+          }
+          throw error;
         }
       },
       async jwt({ token, account, user }) {
