@@ -1,8 +1,17 @@
 import Head from "next/head";
 import { useSession, signIn, signOut, getSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 export default function Index() {
   const { data: session, status } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (router.query.error) {
+      console.log(router.query.error);
+      console.log(typeof router.query.error);
+    }
+  }, [router]);
 
   if (status == "loading") {
     return <p>Loading...</p>;
