@@ -83,28 +83,30 @@ export const authOptions = (req, res) => {
         }
         if (account.provider == "facebook") {
           if (user.email == undefined) {
-            throw new Error("account has no email");
+            throw new Error("account-has-no-email");
           }
           payload.code = account.access_token;
           payload.device_id = "web";
         }
 
         try {
-          let res = await axios.post(
+          let response = await axios.post(
             `https://karir-api.staging.qareer.com/v1/login/${account.provider}`,
             payload
           );
-          console.log("ISI RESPONSE BE", res);
-          if (!res.ok) {
-            throw new Error("Bad response", {
-              cause: { res },
-            });
+          console.log("ISI RESPONSE BE", response);
+          let data = await response?.data?.data;
+          let status = await response?.status;
+
+          if (status === 200) {
+            user.data = data;
+            return true;
+          } else {
+            throw new Error(`${status}`);
           }
         } catch (err) {
           throw err;
         }
-
-        return true;
       },
       async jwt({ token, account, user }) {
         // Persist the OAuth access_token to the token right after signin
@@ -112,11 +114,16 @@ export const authOptions = (req, res) => {
           token.accessToken = account.access_token;
         }
 
+        if (user) {
+          token.data = { user };
+        }
+
         return token;
       },
       async session({ session, token, user, account }) {
         // Send properties to the client, like an access_token from a provider.
-
+        session.user = token?.data?.user;
+        //
         session.accessToken = token.accessToken;
         session.user.email = token.email;
         return session;
