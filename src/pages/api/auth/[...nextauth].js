@@ -75,6 +75,19 @@ export const authOptions = (req, res) => {
         // } else {
         //   return true;
         // }
+        let payload = {};
+        if (account.provider == "google") {
+          payload.email = profile.email;
+          payload.code = account.access_token;
+          payload.device_id = "web";
+        }
+        if (account.provider == "facebook") {
+          if (user.email == undefined) {
+            throw new Error("account has no email");
+          }
+          payload.code = account.access_token;
+          payload.device_id = "web";
+        }
 
         try {
           let res = await axios.post(
@@ -91,13 +104,7 @@ export const authOptions = (req, res) => {
           throw err;
         }
 
-        if (user) {
-          if (user.email == undefined) {
-            throw new Error("Silahkan gunakan metode login yang lain");
-          }
-          return true;
-        }
-        return false;
+        return true;
       },
       async jwt({ token, account, user }) {
         // Persist the OAuth access_token to the token right after signin
