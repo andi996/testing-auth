@@ -9,8 +9,7 @@ export default function Index() {
 
   useEffect(() => {
     if (router.query.error) {
-      console.log(router.query.error);
-      console.log(typeof router.query.error);
+      alert(router.query.error);
     }
   }, [router]);
 
@@ -21,8 +20,9 @@ export default function Index() {
   console.log(session);
 
   const datas = {
-    id: 1,
+    id: 10115623,
     name: "andri",
+    email: "tes@gmail.com",
     age: 26,
     redirect: false,
   };
@@ -31,6 +31,28 @@ export default function Index() {
     e.preventDefault();
     window.history.pushState({}, document.title, window.location.pathname);
     signIn(provider, { redirect: false });
+  };
+
+  const handleCredential = async (e) => {
+    e.preventDefault();
+    window.history.pushState({}, document.title, window.location.pathname);
+
+    let response = await signIn("credentials", {
+      data: JSON.stringify(datas),
+      redirect: false,
+      // callbackUrl: redirect,
+    });
+    let result = await response;
+
+    console.log(result);
+
+    if (!result.ok) {
+      console.log("gagal login");
+    }
+
+    // if (result?.status == 200) {
+    //   window.location.replace("/profile");
+    // }
   };
 
   return (
@@ -44,22 +66,37 @@ export default function Index() {
 
       {!session && (
         <>
-          {/* <button
-            onClick={() =>
-              signIn("credentials", {
-                data: JSON.stringify(datas),
-                callbackUrl: "/profile-two",
-              })
-            }
+          <button
+            onClick={() => window.location.replace("/login")}
+            style={{ marginBottom: 20 }}
           >
-            Sign In Credentials
-          </button> */}
-          <button onClick={(e) => handleLogin(e, "google")}>
-            Sign In Google
+            go to login page
           </button>
-          <button onClick={(e) => handleLogin(e, "facebook")}>
-            Sign In Facebook
-          </button>
+          <div style={{ display: "flex" }}>
+            <button
+              onClick={(e) => {
+                console.log(window.location.href);
+                window.history.pushState(
+                  {},
+                  document.title,
+                  window.location.pathname
+                );
+                console.log(window.location.pathname);
+                console.log(window.location.href);
+              }}
+            >
+              Tes Clear Params
+            </button>
+            <button onClick={(e) => handleCredential(e)}>
+              Sign In Credentials
+            </button>
+            <button onClick={(e) => handleLogin(e, "google")}>
+              Sign In Google
+            </button>
+            <button onClick={(e) => handleLogin(e, "facebook")}>
+              Sign In Facebook
+            </button>
+          </div>
         </>
       )}
 

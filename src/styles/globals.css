@@ -271,3 +271,15 @@ a {
 .link {
   color: #1f96ff;
 }
+
+.input-small {
+  font-size: 12px;
+}
+
+.input-medium {
+  font-size: 16px;
+}
+
+.input-large {
+  font-size: 20px;
+}

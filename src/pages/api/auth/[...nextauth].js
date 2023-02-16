@@ -14,27 +14,16 @@ export const authOptions = (req, res) => {
         id: "credentials",
         async authorize(credentials, req) {
           console.log("ISI CREDENTIALS", credentials);
-          console.log("ISI req", req);
 
-          var tes;
-          if (credentials?.data) {
-            tes = JSON.parse(credentials?.data);
-          }
+          var user = JSON.parse(credentials?.data);
 
-          console.log(tes);
-
-          const user = {
-            id: parseInt(credentials?.id),
-            name: credentials?.name,
-            age: credentials?.age,
-          };
-
-          if (user) {
+          if (user?.email) {
             // Any object returned will be saved in `user` property of the JWT
             return user;
           } else {
             // If you return null then an error will be displayed advising the user to check their details.
-            return null;
+            throw new Error("credentials");
+            // return null;
           }
         },
       }),
@@ -70,11 +59,10 @@ export const authOptions = (req, res) => {
           httpOnly: false,
         });
 
-        // if (user.email == "" || user.email == undefined || user.email == null) {
-        //   return false;
-        // } else {
-        //   return true;
-        // }
+        if (account.provider == "credentials") {
+          return true;
+        }
+
         let payload = {};
         if (account.provider == "google") {
           payload.email = profile.email;
