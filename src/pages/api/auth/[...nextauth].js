@@ -75,6 +75,21 @@ export const authOptions = (req, res) => {
         //   return true;
         // }
 
+        try {
+          let res = await axios.post(
+            `https://karir-api.staging.qareer.com/v1/login/${account.provider}`,
+            payload
+          );
+          console.log("ISI RESPONSE BE", res);
+          if (!res.ok) {
+            throw new Error("Bad response", {
+              cause: { res },
+            });
+          }
+        } catch (err) {
+          throw err;
+        }
+
         if (user) {
           if (user.email == undefined) {
             throw new Error("Silahkan gunakan metode login yang lain");
