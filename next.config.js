@@ -1,11 +1,12 @@
-const withPWA = require("next-pwa");
+const runtimeCaching = require("next-pwa/cache");
+const withPWA = require("next-pwa")({
+  dest: "public",
+  register: true,
+  skipWaiting: true,
+  runtimeCaching,
+});
 
 module.exports = withPWA({
-  pwa: {
-    dest: "public",
-    register: true,
-    skipWaiting: true,
-  },
   env: {
     REACT_APP_ENV: "development",
     GOOGLE_CLIENT_ID:
