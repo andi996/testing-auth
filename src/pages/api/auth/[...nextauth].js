@@ -49,9 +49,9 @@ export const authOptions = (req, res) => {
     },
     callbacks: {
       async signIn({ user, account, profile, email, credentials }) {
-        console.log("ISI USER ", user);
-        console.log("ISI ACCOUNT ", account);
-        console.log("ISI PROFILE ", profile);
+        // console.log("ISI USER ", user);
+        // console.log("ISI ACCOUNT ", account);
+        // console.log("ISI PROFILE ", profile);
 
         const cookies = new Cookies(req, res); // Create a cookies instance
 
@@ -82,7 +82,7 @@ export const authOptions = (req, res) => {
             `https://karir-api.staging.qareer.com/v1/login/${account.provider}`,
             payload
           );
-          console.log("ISI RESPONSE BE", response);
+          // console.log("ISI RESPONSE BE", response);
           let data = await response?.data?.data;
           let status = await response?.status;
 
@@ -107,7 +107,7 @@ export const authOptions = (req, res) => {
           throw new Error(error?.response?.status);
         }
       },
-      async jwt({ token, account, user }) {
+      async jwt({ token, account, user, trigger, session }) {
         // Persist the OAuth access_token to the token right after signin
         if (account) {
           token.accessToken = account.access_token;
@@ -115,6 +115,14 @@ export const authOptions = (req, res) => {
 
         if (user) {
           token.data = { user };
+        }
+
+        if (trigger === "update") {
+          if (session) {
+            token.data.user.data.level = session.newLevel;
+          }
+
+          console.log("UPDATE THE STATE!!!!!");
         }
 
         return token;

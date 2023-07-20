@@ -20,7 +20,15 @@ export async function getServerSideProps(context) {
 }
 
 export default function Index({ user }) {
-  console.log("INI ADALAH ISI USER", user);
+  const { data: session, status, update: sessionUpdate } = useSession();
+
+  const updateSession = async () => {
+    // if(session)
+    await sessionUpdate({
+      newLevel: "AHLINYA AHLI INTINYA INTI",
+    });
+  };
+
   return (
     <div>
       <Head>
@@ -30,8 +38,19 @@ export default function Index({ user }) {
 
       <h1>PROFILE PROTECTED </h1>
 
+      <button
+        onClick={() => console.log({ session })}
+        style={{ marginBottom: 20 }}
+      >
+        console SESSION
+      </button>
+      <button onClick={updateSession} style={{ marginBottom: 20 }}>
+        UPDATE SESSION
+      </button>
+
       {user && (
         <>
+          <h4>You Level are: {session?.user?.data?.level}</h4>
           <h4>You are logged as: {user.name}</h4>
           <div>
             <h4>Email: {user.email}</h4>

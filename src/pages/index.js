@@ -4,8 +4,16 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 export default function Index() {
-  const { data: session, status } = useSession();
   const router = useRouter();
+
+  const { data: session, status, update: sessionUpdate } = useSession();
+
+  const updateSession = async () => {
+    // if(session)
+    await sessionUpdate({
+      newLevel: "SANGAT JAGO",
+    });
+  };
 
   useEffect(() => {
     if (router.query.error) {
@@ -17,7 +25,7 @@ export default function Index() {
     return <p>Loading...</p>;
   }
 
-  console.log(session);
+  // console.log(session);
 
   const datas = {
     id: 10115623,
@@ -44,7 +52,7 @@ export default function Index() {
     });
     let result = await response;
 
-    console.log(result);
+    // console.log(result);
 
     if (!result.ok) {
       console.log("gagal login");
@@ -64,6 +72,19 @@ export default function Index() {
 
       <h1>Google or Facebook Authentication with NextAuth </h1>
 
+      <button
+        onClick={() => console.log({ session })}
+        style={{ marginBottom: 20 }}
+      >
+        console SESSION
+      </button>
+
+      <button onClick={updateSession} style={{ marginBottom: 20 }}>
+        UPDATE SESSION
+      </button>
+
+      <br></br>
+
       {!session && (
         <>
           <button
@@ -75,14 +96,14 @@ export default function Index() {
           <div style={{ display: "flex" }}>
             <button
               onClick={(e) => {
-                console.log(window.location.href);
+                // console.log(window.location.href);
                 window.history.pushState(
                   {},
                   document.title,
                   window.location.pathname
                 );
-                console.log(window.location.pathname);
-                console.log(window.location.href);
+                // console.log(window.location.pathname);
+                // console.log(window.location.href);
               }}
             >
               Tes Clear Params
