@@ -79,7 +79,7 @@ export const authOptions = (req, res) => {
 
         try {
           let response = await axios.post(
-            `https://karir-api.staging.qareer.com/v1/login/${account.provider}`,
+            `https://gateway2-beta.karir.com/v1/login/${account.provider}`,
             payload
           );
           // console.log("ISI RESPONSE BE", response);
